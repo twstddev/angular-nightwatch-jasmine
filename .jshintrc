@@ -1,0 +1,13 @@
+{
+	"browserify" : true,
+	"browser" : true,
+	"devel" : true,
+	"jasmine" : true,
+	"mocha" : true,
+	"predef" : [
+		"element",
+		"by",
+		"expect",
+		"browser",
+	]
+}

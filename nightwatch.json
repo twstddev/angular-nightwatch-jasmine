@@ -1,0 +1,28 @@
+{
+	"src_folders" : [ "test/acceptance/" ],
+	"globals_path" : "test/helpers/index.js",
+	"custom_commands_path" : "test/helpers/commands",
+	"output_folder" : "reports/acceptance",
+	"test_runner" : "mocha",
+
+	"selenium" : {
+		"start_process" : true,
+		"server_path" : "node_modules/selenium-server/lib/runner/selenium-server-standalone-2.47.1.jar",
+
+		"cli_args" : {
+			"webdriver.chrome.driver" : "test/driver/chromedriver.exe"
+		}
+	},
+
+	"test_settings" : {
+		"default" : {
+			"end_session_on_fail" : false,
+			"silent" : true,
+			"desiredCapabilities" : {
+				"browserName" : "chrome"
+			},
+
+			"launch_url" : "http://localhost:8000"
+		}
+	}
+}

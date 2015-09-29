@@ -1,0 +1,10 @@
+node_modules/
+dist/
+**/*.log
+.sass-cache/
+*.swp
+.DS_Store
+app/css/
+app/build/
+coverage/
+docs/
