@@ -29,7 +29,7 @@ gulp.task( "default", function( done ) {
 		"scripts:build",
 		"sass:production",
 		"usemin",
-		"assets"
+		"assets",
 		done );
 } );
 

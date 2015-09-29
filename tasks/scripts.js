@@ -40,37 +40,6 @@ var bundle = function( bundler ) {
 gulp.task( "scripts:build", function() {
 	var bundler = createBundler();
 	bundler.transform( preprocessify( {
-		"API_URL" : global.config.production.api,
-		"REQUIRE_AUTHENTICATION" : true
-	} ) );
-
-	return bundle( bundler );
-} );
-
-gulp.task( "scripts:build:uat", function() {
-	var bundler = createBundler();
-	bundler.transform( preprocessify( {
-		"API_URL" : global.config.uat.api,
-		"REQUIRE_AUTHENTICATION" : true
-	} ) );
-
-	return bundle( bundler );
-} );
-
-gulp.task( "scripts:build:acceptance", function() {
-	var bundler = createBundler();
-	bundler.transform( preprocessify( {
-		ACCEPTANCE_TESTING : true
-	} ) );
-
-	return bundle( bundler );
-} );
-
-
-gulp.task( "scripts:build:update", function() {
-	var bundler = createBundler();
-	bundler.transform( preprocessify( {
-		"API_URL" : global.config.development.api
 	} ) );
 
 	return bundle( bundler );
@@ -83,7 +52,6 @@ gulp.task( "scripts:watch", function() {
 	} );
 
 	watchifyBundler.transform( preprocessify( {
-		"API_URL" : global.config.development.api
 	} ) );
 
 	watchifyBundler.on( "update", function() {

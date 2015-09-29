@@ -20,7 +20,7 @@ gulp.task( "test:specs", function( done ) {
 	new KarmaServer( karmaConfig, done ).start();
 } );
 
-gulp.task( "test:acceptance:server", [ "sass", "scripts:build:acceptance" ], function() {
+gulp.task( "test:acceptance:server", function() {
 	connect.server( {
 		root : "app",
 		port : 8000

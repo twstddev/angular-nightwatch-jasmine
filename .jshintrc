@@ -4,10 +4,11 @@
 	"devel" : true,
 	"jasmine" : true,
 	"mocha" : true,
+	"expr" : true,
 	"predef" : [
 		"element",
 		"by",
 		"expect",
-		"browser",
+		"browser"
 	]
 }
