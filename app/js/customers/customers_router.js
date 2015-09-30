@@ -10,12 +10,22 @@
 module.exports = [ "$stateProvider", function( $stateProvider ) {
 	$stateProvider
 		.state( "customers", {
+			abstract : true,
 			url : "/customers",
 			views : {
 				main : {
-					template : require( "templates/customers/index.html" ),
-					controller : "CustomersIndexController"
+					template : "<ui-view/>"
 				}
 			}
+		} )
+		.state( "customers.list", {
+			url : "",
+			controller : "CustomersIndexController",
+			template : require( "templates/customers/index.html" ),
+		} )
+		.state( "customers.add", {
+			url : "/add",
+			controller : "CustomersAddController",
+			template : require( "templates/customers/add.html" )
 		} );
 } ];

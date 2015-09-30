@@ -11,9 +11,11 @@ Application.prototype.open = function() {
 };
 
 Application.prototype.close = function( done ) {
-	this.browser.end( function() {
-		done();
-	} );
+	this.browser
+		.useCss()
+		.end( function() {
+			done();
+		} );
 };
 
 module.exports = Application;

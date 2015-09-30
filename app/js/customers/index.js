@@ -6,6 +6,8 @@ require( "ngstorage" );
 
 var CustomersRouter = require( "./customers_router" );
 var CustomersIndexController = require( "./controllers/customers_index" );
+var CustomersAddController = require( "./controllers/customers_add" );
+var CustomerFieldsDirective = require( "./customer_fields_directive" );
 var Customers = require( "./customers_resource" );
 
 /**
@@ -16,6 +18,8 @@ var Customers = require( "./customers_resource" );
 angular.module( "customers", [ angularUiRouter, "ngStorage" ] )
 	.config( CustomersRouter )
 	.controller( "CustomersIndexController", CustomersIndexController )
+	.controller( "CustomersAddController", CustomersAddController )
+	.directive( "customerFields", CustomerFieldsDirective )
 	.factory( "Customers", Customers );
 
 module.exports = "customers";
