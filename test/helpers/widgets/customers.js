@@ -54,6 +54,10 @@ CustomersWidget.prototype.editCustomer = function( id, details ) {
 	this.browser.click( ".edit-customer" );
 };
 
+CustomersWidget.prototype.removeCustomer = function( id ) {
+	this.browser.click( this.getCustomerSelectorById( id ) + " .remove-customer" );
+};
+
 CustomersWidget.prototype.setFieldValue = function( fieldName, value ) {
 	this.browser
 		.clearValue( fieldName )

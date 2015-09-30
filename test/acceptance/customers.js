@@ -120,6 +120,14 @@ describe( "Customers", function() {
 		} );
 	} );
 
+	it.only( "removes existing customer", function() {
+		this.storage.addCustomers( customersFixture );
+		this.customersWidget.openListPage();
+
+		this.customersWidget.removeCustomer( customersFixture[ 0 ].id );
+		this.customersWidget.doesntContainCustomerId( customersFixture[ 0 ].id );
+	} );
+
 
 	afterEach( function( client, done ) {
 		this.application.close( done );

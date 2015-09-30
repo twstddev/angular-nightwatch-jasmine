@@ -1,5 +1,6 @@
 <ul>
 	<li class="customer" id="customer-{{customer.id}}" ng-repeat="customer in customers">
 		{{customer.username}}
+		<button class="remove-customer" ng-click="removeCustomer(customer)">Remove</button>
 	</li>
 </ul>
