@@ -96,5 +96,35 @@ describe( "CustomersRouter", function() {
 			expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
 		} ) );
 	} );
+
+	describe( "show", function() {
+		var customersShowConfig;
+
+		beforeEach( angular.mock.inject( function( $state ) {
+			customersShowConfig = $state.get( "customers.show" );
+		} ) );
+
+		it( "registers path", function() {
+			expect( customersShowConfig ).not.toBeNull();
+			expect( customersShowConfig.url ).toBe( "/:customerId" );
+		} );
+
+		it( "provides templates", function() {
+			expect( customersShowConfig.template ).toBeDefined();
+		} );
+
+		it( "registers controller", function() {
+			expect( customersShowConfig.controller ).toBeDefined();
+		} );
+
+		it( "resolves customerId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
+			var customerId = "1";
+
+			$state.go( "customers.show", { customerId : customerId } );
+			$rootScope.$digest();
+
+			expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
+		} ) );
+	} );
 } );
 

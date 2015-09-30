@@ -58,6 +58,32 @@ CustomersWidget.prototype.removeCustomer = function( id ) {
 	this.browser.click( this.getCustomerSelectorById( id ) + " .remove-customer" );
 };
 
+CustomersWidget.prototype.showCustomer = function( id ) {
+	this.browser.urlHash( "customers/" + id );
+};
+
+CustomersWidget.prototype.containsUsername = function( username ) {
+	this.browser
+		.useXpath()
+		.expect.element( this.getSelectorContainingText( username ) ).to.be.present;
+};
+
+CustomersWidget.prototype.containsEmail = function( email ) {
+	this.browser
+		.useXpath()
+		.expect.element( this.getSelectorContainingText( email ) ).to.be.present;
+};
+CustomersWidget.prototype.containsFirstName = function( firstName ) {
+	this.browser
+		.useXpath()
+		.expect.element( this.getSelectorContainingText( firstName ) ).to.be.present;
+};
+CustomersWidget.prototype.containsLastName = function( lastName ) {
+	this.browser
+		.useXpath()
+		.expect.element( this.getSelectorContainingText( lastName ) ).to.be.present;
+};
+
 CustomersWidget.prototype.setFieldValue = function( fieldName, value ) {
 	this.browser
 		.clearValue( fieldName )
@@ -74,6 +100,9 @@ CustomersWidget.prototype.getErrorSelector = function( message ) {
 	return "//*[contains(string(@class), 'alert')][contains(text(), '" + message + "')]";
 };
 
+CustomersWidget.prototype.getSelectorContainingText = function( text ) {
+	return "//*[contains(text(), '" + text + "')]";
+};
 
 CustomersWidget.prototype.getCustomerSelector = function( username ) {
 	return "//*[contains(string(@class), 'customer')][contains(text(), '" + username + "')]";

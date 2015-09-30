@@ -120,12 +120,42 @@ describe( "Customers", function() {
 		} );
 	} );
 
-	it.only( "removes existing customer", function() {
+	it( "removes existing customer", function() {
 		this.storage.addCustomers( customersFixture );
 		this.customersWidget.openListPage();
 
 		this.customersWidget.removeCustomer( customersFixture[ 0 ].id );
 		this.customersWidget.doesntContainCustomerId( customersFixture[ 0 ].id );
+	} );
+
+	describe( "Show page", function() {
+		var customer;
+
+		beforeEach( function( client, done ) {
+			this.storage.addCustomers( customersFixture );
+			customer = customersFixture[ 0 ];
+			done();
+		} );
+
+		it( "displays customer username", function() {
+			this.customersWidget.showCustomer( customer.id );
+			this.customersWidget.containsUsername( customer.username );
+		} );
+
+		it( "displays customer email", function() {
+			this.customersWidget.showCustomer( customer.id );
+			this.customersWidget.containsEmail( customer.email );
+		} );
+
+		it( "displays customer first name", function() {
+			this.customersWidget.showCustomer( customer.id );
+			this.customersWidget.containsFirstName( customer.firstName );
+		} );
+
+		it( "displays customer last name", function() {
+			this.customersWidget.showCustomer( customer.id );
+			this.customersWidget.containsLastName( customer.lastName );
+		} );
 	} );
 
 

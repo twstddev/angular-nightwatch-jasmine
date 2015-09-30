@@ -19,7 +19,7 @@ describe( "CustomersEditController", function() {
 		$controller( "CustomersEditController", {
 			$scope : $scope,
 			Customers : customers,
-			customerId : "1"
+			customerId : customers[ 0 ].id
 		} );
 	} ) );
 

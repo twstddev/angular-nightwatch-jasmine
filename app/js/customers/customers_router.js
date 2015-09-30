@@ -8,6 +8,10 @@
  * @memberof module:Customers
  */
 module.exports = [ "$stateProvider", function( $stateProvider ) {
+	var customerIdResolver = [ "$stateParams", function( $stateParams ) {
+		return $stateParams.customerId;
+	} ];
+
 	$stateProvider
 		.state( "customers", {
 			abstract : true,
@@ -33,9 +37,15 @@ module.exports = [ "$stateProvider", function( $stateProvider ) {
 			controller : "CustomersEditController",
 			template : require( "templates/customers/edit.html" ),
 			resolve : {
-				customerId : [ "$stateParams", function( $stateParams ) {
-					return $stateParams.customerId;
-				} ]
+				customerId : customerIdResolver
+			}
+		} )
+		.state( "customers.show", {
+			url : "/:customerId",
+			controller : "CustomersShowController",
+			template : require( "templates/customers/show.html" ),
+			resolve : {
+				customerId : customerIdResolver
 			}
 		} );
 } ];
