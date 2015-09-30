@@ -27,5 +27,15 @@ module.exports = [ "$stateProvider", function( $stateProvider ) {
 			url : "/add",
 			controller : "CustomersAddController",
 			template : require( "templates/customers/add.html" )
+		} )
+		.state( "customers.edit", {
+			url : "/:customerId/edit",
+			controller : "CustomersEditController",
+			template : require( "templates/customers/edit.html" ),
+			resolve : {
+				customerId : [ "$stateParams", function( $stateParams ) {
+					return $stateParams.customerId;
+				} ]
+			}
 		} );
 } ];

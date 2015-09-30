@@ -17,12 +17,12 @@ describe( "Customers", function() {
 		this.storage.addCustomers( customersFixture );
 		this.customersWidget.openListPage();
 
-		this.customersWidget.containsCustomer( "user1" );
-		this.customersWidget.containsCustomer( "user2" );
-		this.customersWidget.doesntContainCustomer( "user3" );
+		this.customersWidget.containsCustomerId( "1" );
+		this.customersWidget.containsCustomerId( "2" );
+		this.customersWidget.doesntContainCustomerId( "3" );
 	} );
 
-	describe.only( "Add page", function() {
+	describe( "Add page", function() {
 		var customer = {
 			username : "user4",
 			email : "user4@user.org",
@@ -74,6 +74,48 @@ describe( "Customers", function() {
 			invalidCustomer.lastName = "";
 
 			this.customersWidget.addCustomer( invalidCustomer );
+			this.customersWidget.containsError( "Last name is required" );
+		} );
+	} );
+
+	describe( "Edit page", function() {
+		beforeEach( function( client, done ) {
+			this.storage.addCustomers( customersFixture );
+			done();
+		} ),
+
+		it( "updates existing customer", function(client) {
+			var customerId = customersFixture[ 0 ].id;
+			var newName = "usernew";
+
+			this.customersWidget.editCustomer( customerId, { username : newName } );
+
+			this.customersWidget.openListPage();
+			this.customersWidget.containsCustomer( newName );
+		} );
+
+		it( "requires username value", function() {
+			this.customersWidget.editCustomer( customersFixture[ 0 ].id, { username : "" } );
+			this.customersWidget.containsError( "Username is required" );
+		} );
+
+		it( "requires email value", function() {
+			this.customersWidget.editCustomer( customersFixture[ 0 ].id, { email : "" } );
+			this.customersWidget.containsError( "Email is required" );
+		} );
+
+		it( "requires email to be valid", function() {
+			this.customersWidget.editCustomer( customersFixture[ 0 ].id, { email : "email" } );
+			this.customersWidget.containsError( "Email must be valid" );
+		} );
+
+		it( "requires first name value", function() {
+			this.customersWidget.editCustomer( customersFixture[ 0 ].id, { firstName : "" } );
+			this.customersWidget.containsError( "First name is required" );
+		} );
+
+		it( "requires last name value", function() {
+			this.customersWidget.editCustomer( customersFixture[ 0 ].id, { lastName : "" } );
 			this.customersWidget.containsError( "Last name is required" );
 		} );
 	} );
