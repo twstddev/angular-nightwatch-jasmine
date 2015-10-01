@@ -30,5 +30,16 @@ module.exports = [ "$stateProvider", "customerIdResolver",
 			resolve : {
 				customerId : customerIdResolver
 			}
+		} )
+		.state( "customers.accounts.edit", {
+			url : "/:accountId/edit",
+			controller : "AccountsCustomersEditController",
+			template : require( "templates/accounts/customers_edit.html" ),
+			resolve : {
+				customerId : customerIdResolver,
+				accountId : [ "$stateParams", function( $stateParams ) {
+					return $stateParams.accountId;
+				} ]
+			}
 		} );
 } ];

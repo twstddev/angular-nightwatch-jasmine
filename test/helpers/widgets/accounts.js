@@ -31,6 +31,15 @@ AccountsWidget.prototype.addAccountFor = function( customerId, account ) {
 	this.browser.click( ".add-account" );
 };
 
+AccountsWidget.prototype.editAccountFor = function( customerId, accountId, details ) {
+	this.browser.urlHash( "customers/" + customerId + "/accounts/" + accountId + "/edit" );
+	
+	( details.currency !== undefined ) && this.setFieldValue( "#currency", details.currency );
+	( details.total !== undefined ) && this.setFieldValue( "#total", details.total );
+
+	this.browser.click( ".edit-account" );
+};
+
 AccountsWidget.prototype.containsAccount = function( currency, total ) {
 	var accountSelector = [
 		"//*[contains(string(@class), 'account') and",

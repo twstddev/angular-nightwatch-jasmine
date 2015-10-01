@@ -62,6 +62,40 @@ describe( "Accounts", function() {
 				this.accountsWidget.containsError( "Total is required" );
 			} );
 		} );
+
+		describe( "Edit page", function() {
+			var customerId = customersFixture[ 0 ].id;
+			var accountId = accountsFixture[ 0 ].id;
+
+			beforeEach( function( client, done ) {
+				this.accountsWidget.openListPageForCustomer( customerId );
+
+				done();
+			} );
+
+			it( "updates existing customer", function(client) {
+				var newCurrency = "Z";
+				var newTotal = 55;
+
+				this.accountsWidget.editAccountFor( customerId, accountId, {
+					currency : newCurrency,
+					total : newTotal
+				} );
+
+				this.accountsWidget.openListPageForCustomer( customerId );
+				this.accountsWidget.containsAccount( newCurrency, newTotal );
+			} );
+
+			it( "requires currency value", function() {
+				this.accountsWidget.editAccountFor( customerId, accountId, { currency : "" } );
+				this.accountsWidget.containsError( "Currency is required" );
+			} );
+
+			it( "requires total value", function() {
+				this.accountsWidget.editAccountFor( customerId, accountId, { total : "" } );
+				this.accountsWidget.containsError( "Total is required" );
+			} );
+		} );
 	} );
 
 	afterEach( function( client, done ) {

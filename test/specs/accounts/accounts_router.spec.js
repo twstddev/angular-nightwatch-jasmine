@@ -80,5 +80,44 @@ describe( "AccountsRouter", function() {
 				expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
 			} ) );
 		} );
+
+		describe( "edit", function() {
+			var accountsEditConfig;
+
+			beforeEach( angular.mock.inject( function( $state ) {
+				accountsEditConfig = $state.get( "customers.accounts.edit" );
+			} ) );
+
+			it( "registers path", function() {
+				expect( accountsEditConfig ).not.toBeNull();
+				expect( accountsEditConfig.url ).toBe( "/:accountId/edit" );
+			} );
+
+			it( "provides template", function() {
+				expect( accountsEditConfig.template ).toBeDefined();
+			} );
+
+			it( "registers controller", function() {
+				expect( accountsEditConfig.controller ).toBeDefined();
+			} );
+
+			it( "resolves customerId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
+				var customerId = "1";
+
+				$state.go( "customers.accounts.edit", { customerId : customerId } );
+				$rootScope.$digest();
+
+				expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
+			} ) );
+
+			it( "resolves accountId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
+				var accountId = "1";
+
+				$state.go( "customers.accounts.edit", { accountId : accountId } );
+				$rootScope.$digest();
+
+				expect( $injector.invoke($state.current.resolve.accountId ) ).toBe( accountId );
+			} ) );
+		} );
 	} );
 } );
