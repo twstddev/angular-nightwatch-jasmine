@@ -25,6 +25,43 @@ describe( "Accounts", function() {
 			this.accountsWidget.containsAccountId( "2" );
 			this.accountsWidget.doesntContainAccountId( "3" );
 		} );
+
+		describe( "Add page", function() {
+			var account = {
+				currency : "$",
+				total : 30
+			};
+			var customerId = customersFixture[ 0 ].id;
+
+			beforeEach( function( client, done ) {
+				this.accountsWidget.openListPageForCustomer( customerId );
+
+				done();
+			} );
+
+			it( "creates a new account", function() {
+				this.accountsWidget.addAccountFor( customerId, account );
+
+				this.accountsWidget.openListPageForCustomer( customerId );
+				this.accountsWidget.containsAccount( account.currency, account.total );
+			} );
+
+			it( "requires currency value", function() {
+				var invalidAccount = Object.create( account );
+				invalidAccount.currency = "";
+
+				this.accountsWidget.addAccountFor( customerId, invalidAccount );
+				this.accountsWidget.containsError( "Currency is required" );
+			} );
+
+			it( "requires total value", function() {
+				var invalidAccount = Object.create( account );
+				invalidAccount.total = "";
+
+				this.accountsWidget.addAccountFor( customerId, invalidAccount );
+				this.accountsWidget.containsError( "Total is required" );
+			} );
+		} );
 	} );
 
 	afterEach( function( client, done ) {

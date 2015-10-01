@@ -50,5 +50,35 @@ describe( "AccountsRouter", function() {
 				expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
 			} ) );
 		} );
+
+		describe( "add", function() {
+			var accountsAddConfig;
+
+			beforeEach( angular.mock.inject( function( $state ) {
+				accountsAddConfig = $state.get( "customers.accounts.add" );
+			} ) );
+
+			it( "registers path", function() {
+				expect( accountsAddConfig ).not.toBeNull();
+				expect( accountsAddConfig.url ).toBe( "/add" );
+			} );
+
+			it( "provides template", function() {
+				expect( accountsAddConfig.template ).toBeDefined();
+			} );
+
+			it( "registers controller", function() {
+				expect( accountsAddConfig.controller ).toBeDefined();
+			} );
+
+			it( "resolves customerId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
+				var customerId = "1";
+
+				$state.go( "customers.accounts.add", { customerId : customerId } );
+				$rootScope.$digest();
+
+				expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
+			} ) );
+		} );
 	} );
 } );

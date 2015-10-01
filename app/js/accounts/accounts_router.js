@@ -22,5 +22,13 @@ module.exports = [ "$stateProvider", "customerIdResolver",
 			resolve : {
 				customerId : customerIdResolver
 			}
+		} )
+		.state( "customers.accounts.add", {
+			url : "/add",
+			controller : "AccountsCustomersAddController",
+			template : require( "templates/accounts/customers_add.html" ),
+			resolve : {
+				customerId : customerIdResolver
+			}
 		} );
 } ];

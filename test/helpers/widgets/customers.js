@@ -1,8 +1,12 @@
 "use strict";
 
+var Widget = require( "../shared/widget" );
+
 var CustomersWidget = function( browser ) {
 	this.browser = browser;
 };
+
+CustomersWidget.prototype = Object.create( Widget );
 
 CustomersWidget.prototype.openListPage = function() {
 	this.browser.urlHash( "customers" );
@@ -80,22 +84,6 @@ CustomersWidget.prototype.containsLastName = function( lastName ) {
 	this.browser
 		.useXpath()
 		.expect.element( this.getSelectorContainingText( lastName ) ).to.be.present;
-};
-
-CustomersWidget.prototype.setFieldValue = function( fieldName, value ) {
-	this.browser
-		.clearValue( fieldName )
-		.setValue( fieldName, value ); 
-};
-
-CustomersWidget.prototype.containsError = function( message ) {
-	this.browser
-		.useXpath()
-		.expect.element( this.getErrorSelector( message ) ).to.be.present;
-};
-
-CustomersWidget.prototype.getErrorSelector = function( message ) {
-	return "//*[contains(string(@class), 'alert')][contains(text(), '" + message + "')]";
 };
 
 CustomersWidget.prototype.getSelectorContainingText = function( text ) {
