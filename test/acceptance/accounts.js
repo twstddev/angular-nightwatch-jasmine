@@ -18,8 +18,10 @@ describe( "Accounts", function() {
 	} );
 
 	describe( "For customer", function() {
+		var customerId = customersFixture[ 0 ].id;
+
 		it( "displays a list of accounts for requested customer", function() {
-			this.accountsWidget.openListPageForCustomer( customersFixture[ 0 ].id );
+			this.accountsWidget.openListPageForCustomer( customerId );
 
 			this.accountsWidget.containsAccountId( "1" );
 			this.accountsWidget.containsAccountId( "2" );
@@ -31,7 +33,6 @@ describe( "Accounts", function() {
 				currency : "$",
 				total : 30
 			};
-			var customerId = customersFixture[ 0 ].id;
 
 			beforeEach( function( client, done ) {
 				this.accountsWidget.openListPageForCustomer( customerId );
@@ -64,7 +65,6 @@ describe( "Accounts", function() {
 		} );
 
 		describe( "Edit page", function() {
-			var customerId = customersFixture[ 0 ].id;
 			var accountId = accountsFixture[ 0 ].id;
 
 			beforeEach( function( client, done ) {
@@ -95,6 +95,15 @@ describe( "Accounts", function() {
 				this.accountsWidget.editAccountFor( customerId, accountId, { total : "" } );
 				this.accountsWidget.containsError( "Total is required" );
 			} );
+		} );
+
+		it( "removes existing account", function() {
+			var accountId = accountsFixture[ 0 ].id;
+
+			this.accountsWidget.openListPageForCustomer( customerId );
+
+			this.accountsWidget.removeAccount( accountId );
+			this.accountsWidget.doesntContainAccountId( accountId );
 		} );
 	} );
 

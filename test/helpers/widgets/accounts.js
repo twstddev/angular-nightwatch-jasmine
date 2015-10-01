@@ -40,6 +40,10 @@ AccountsWidget.prototype.editAccountFor = function( customerId, accountId, detai
 	this.browser.click( ".edit-account" );
 };
 
+AccountsWidget.prototype.removeAccount = function( id ) {
+	this.browser.click( this.getAccountSelectorById( id ) + " .remove-account" );
+};
+
 AccountsWidget.prototype.containsAccount = function( currency, total ) {
 	var accountSelector = [
 		"//*[contains(string(@class), 'account') and",
