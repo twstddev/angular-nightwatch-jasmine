@@ -28,7 +28,7 @@ describe( "AccountsRouter", function() {
 				accountsListConfig = $state.get( "customers.accounts.list" );
 			} ) );
 
-			it( "registers customers path", function() {
+			it( "registers path", function() {
 				expect( accountsListConfig ).not.toBeNull();
 				expect( accountsListConfig.url ).toBe( "" );
 			} );
@@ -119,5 +119,30 @@ describe( "AccountsRouter", function() {
 				expect( $injector.invoke($state.current.resolve.accountId ) ).toBe( accountId );
 			} ) );
 		} );
+	} );
+
+	describe( "generic accounts page", function() {
+			var accountsConfig;
+
+			beforeEach( angular.mock.inject( function( $state ) {
+				accountsConfig = $state.get( "accounts" );
+			} ) );
+
+			it( "registers path", function() {
+				expect( accountsConfig ).not.toBeNull();
+				expect( accountsConfig.url ).toBe( "/accounts" );
+			} );
+
+			it( "attaches to the main view", function() {
+				expect( Object.keys( accountsConfig.views ) ).toContain( "main" );
+			} );
+
+			it( "provides template", function() {
+				expect( accountsConfig.views.main.template ).toBeDefined();
+			} );
+
+			it( "registers controller", function() {
+				expect( accountsConfig.views.main.controller ).toBeDefined();
+			} );
 	} );
 } );

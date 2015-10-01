@@ -41,5 +41,14 @@ module.exports = [ "$stateProvider", "customerIdResolver",
 					return $stateParams.accountId;
 				} ]
 			}
+		} )
+		.state( "accounts", {
+			url : "/accounts",
+			views : {
+				main : {
+					template : require( "templates/accounts/index.html" ),
+					controller : "AccountsIndexController"
+				}
+			}
 		} );
 } ];

@@ -8,6 +8,10 @@ var AccountsWidget = function( browser ) {
 
 AccountsWidget.prototype = Object.create( Widget );
 
+AccountsWidget.prototype.openAccountsListPage = function() {
+	this.browser.urlHash( "accounts" );
+};
+
 AccountsWidget.prototype.openListPageForCustomer = function( id ) {
 	this.browser.urlHash( "customers/" + id + "/accounts" );
 };

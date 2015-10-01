@@ -10,6 +10,7 @@ var AccountsRouter = require( "./accounts_router" );
 var AccountsCustomersIndexController = require( "./controllers/accounts_customers_index" );
 var AccountsCustomersAddController = require( "./controllers/accounts_customers_add" );
 var AccountsCustomersEditController = require( "./controllers/accounts_customers_edit" );
+var AccountsIndexController = require( "./controllers/accounts_index" );
 var AccountFieldsDirective = require( "./account_fields_directive" );
 var Accounts = require( "./accounts_resource" );
 
@@ -23,6 +24,7 @@ angular.module( "accounts", [ angularUiRouter, "ngStorage", "customers" ] )
 	.controller( "AccountsCustomersIndexController", AccountsCustomersIndexController )
 	.controller( "AccountsCustomersAddController", AccountsCustomersAddController )
 	.controller( "AccountsCustomersEditController", AccountsCustomersEditController )
+	.controller( "AccountsIndexController", AccountsIndexController )
 	.directive( "accountFields", AccountFieldsDirective )
 	.factory( "Accounts", Accounts );
 

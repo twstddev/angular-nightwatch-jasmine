@@ -107,6 +107,13 @@ describe( "Accounts", function() {
 		} );
 	} );
 
+	it( "displays a list of accounts on generic accounts page", function() {
+			this.accountsWidget.openAccountsListPage();
+
+			this.accountsWidget.containsAccountId( "1" );
+			this.accountsWidget.containsAccountId( "2" );
+	} );
+
 	afterEach( function( client, done ) {
 		this.application.close( done );
 	} );
