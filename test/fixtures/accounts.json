@@ -1,0 +1,26 @@
+[
+	{
+		"id" : "1",
+		"currency" : "£",
+		"total" : 0,
+		"customerId" : "1"
+	},
+	{
+		"id" : "2",
+		"currency" : "$",
+		"total" : 20,
+		"customerId" : "1"
+	},
+	{
+		"id" : "3",
+		"currency" : "£",
+		"total" : 10,
+		"customerId" : "2"
+	},
+	{
+		"id" : "4",
+		"currency" : "$",
+		"total" : 5,
+		"customerId" : "2"
+	}
+]

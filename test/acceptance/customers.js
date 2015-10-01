@@ -158,7 +158,6 @@ describe( "Customers", function() {
 		} );
 	} );
 
-
 	afterEach( function( client, done ) {
 		this.application.close( done );
 	} );

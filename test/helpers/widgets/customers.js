@@ -1,7 +1,5 @@
 "use strict";
 
-
-
 var CustomersWidget = function( browser ) {
 	this.browser = browser;
 };

@@ -3,15 +3,15 @@
 /**
  * A router that registers and manages following routes:
  * - __/customers__ - index page that displays a list of registered customers
+ * - __/customers/add__ - page that allows creating customers
+ * - __/customers/:customerId/edit__ - page that allows updating customers
+ * - __/customers/:customerId__ - page that displays details of customer
  *
  * @name CustomersRouter
  * @memberof module:Customers
  */
-module.exports = [ "$stateProvider", function( $stateProvider ) {
-	var customerIdResolver = [ "$stateParams", function( $stateParams ) {
-		return $stateParams.customerId;
-	} ];
-
+module.exports = [ "$stateProvider", "customerIdResolver",
+	function( $stateProvider, customerIdResolver ) {
 	$stateProvider
 		.state( "customers", {
 			abstract : true,
