@@ -53,8 +53,25 @@ AccountsWidget.prototype.depositTo = function( id, deposit ) {
 	this.browser.click( this.getAccountSelectorById( id ) + " .deposit" );
 };
 
+AccountsWidget.prototype.withdrawFrom = function( id, withdraw ) {
+	this.setFieldValue( this.getAccountSelectorById( id ) + " .amount-field", withdraw );
+	this.browser.click( this.getAccountSelectorById( id ) + " .withdraw" );
+};
+
 AccountsWidget.prototype.containsAccount = function( currency, total ) {
-	var accountSelector = [
+	this.browser
+		.useXpath()
+		.expect.element( this.getAccountSelector( currency, total) ).to.be.present;
+};
+
+AccountsWidget.prototype.doesntContainAccount = function( currency, total ) {
+	this.browser
+		.useXpath()
+		.expect.element( this.getAccountSelector( currency, total) ).not.to.be.present;
+};
+
+AccountsWidget.prototype.getAccountSelector = function( currency, total ) {
+	return [
 		"//*[contains(string(@class), 'account') and",
 		" ./*[contains(text(), '",
 		currency,
@@ -62,10 +79,6 @@ AccountsWidget.prototype.containsAccount = function( currency, total ) {
 		total,
 		"')]]"
 	].join( "" );
-
-	this.browser
-		.useXpath()
-		.expect.element( accountSelector ).to.be.present;
 };
 
 AccountsWidget.prototype.getAccountSelectorById = function( id ) {

@@ -35,4 +35,42 @@ describe( "AccountsIndexController", function() {
 		$scope.depositToAccount( account, deposit );
 		expect( account.total ).toBe( deposit + currentTotal );
 	} );
+
+	it( "allows withdrawing money from an account", function() {
+		var account = $scope.accounts[ 0 ];
+		var withdraw = 15;
+		var currentTotal = account.total;
+
+		$scope.withdrawFromAccount( account, withdraw );
+		expect( account.total ).toBe( currentTotal - withdraw );
+	} );
+
+	describe( "withdraw", function() {
+		var account;
+		var currentTotal;
+		var withdraw;
+
+		beforeEach( function() {
+			account = $scope.accounts[ 0 ];
+			currentTotal = account.total;
+			withdraw = currentTotal + 20;
+		} );
+
+		it( "doesn't allow withdrawing if account doesn't have enough money", function() {
+			$scope.withdrawFromAccount( account, withdraw );
+			expect( account.total ).toBe( currentTotal );
+		} );
+
+		it( "adds error if account doesn't have enough money to withdraw", function() {
+			expect( $scope.errors.length ).toBe( 0 );
+			$scope.withdrawFromAccount( account, withdraw );
+			expect( $scope.errors.length ).toBe( 1 );
+		} );
+	} );
+
+	it( "removes messages from the errors list", function() {
+		$scope.errors.push( {} );
+		$scope.clearErrors();
+		expect( $scope.errors.length ).toBe( 0 );
+	} );
 } );

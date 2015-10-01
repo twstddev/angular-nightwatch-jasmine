@@ -1,3 +1,6 @@
+<p class="alert" ng-repeat="error in errors">
+	{{error}}
+</p>
 <ul class="accounts">
 	<li class="account" id="account-{{account.id}}" ng-repeat="account in accounts" ng-init="amount = 0">
 		<strong>{{account.id}}</strong>
@@ -6,6 +9,7 @@
 		<div>
 			<input type="number" class="amount-field" ng-model="amount" />
 			<button class="deposit" ng-disabled="!amount" ng-click="depositToAccount(account, amount)">Deposit</button>
+			<button class="withdraw" ng-disabled="!amount" ng-click="withdrawFromAccount(account, amount)">Withdraw</button>
 		</div>
 	</li>
 </ul>

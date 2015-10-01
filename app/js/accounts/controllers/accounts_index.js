@@ -10,6 +10,7 @@ var angular = require( "angular" );
  */
 var AccountsIndexController = function( $scope, Accounts ) {
 	$scope.accounts = Accounts;
+	$scope.errors = [];
 
 	/**
 	 * Adds given amount of money to specified account.
@@ -22,6 +23,37 @@ var AccountsIndexController = function( $scope, Accounts ) {
 	 */
 	$scope.depositToAccount = function( account, deposit ) {
 		account.total = ( +account.total ) + ( +deposit );
+	};
+
+	/**
+	 * Removes given amount of money from specified account.
+	 *
+	 * @param {Object} account
+	 * @param {String|Number} withdraw
+	 * @inner
+	 * @function withdrawFromAccount
+	 * @memberof module:Accounts.AccountsIndexController
+	 */
+	$scope.withdrawFromAccount = function( account, withdraw ) {
+		$scope.clearErrors();
+
+		if ( ( +withdraw ) <= account.total ) {
+			account.total -= withdraw;
+		}
+		else {
+			$scope.errors.push( "Account doesn't have enough money" );
+		}
+	};
+
+	/**
+	 * Removes all messages from the errors list.
+	 *
+	 * @inner
+	 * @function clearErrors
+	 * @memberof module:Accounts.AccountsIndexController
+	 */
+	$scope.clearErrors = function() {
+		$scope.errors = [];
 	};
 };
 

@@ -126,6 +126,29 @@ describe( "Accounts", function() {
 		} );
 	} );
 
+	describe( "Withdraw", function() {
+		it( "allows withdrawing from an account", function() {
+			var accountId = accountsFixture[ 1 ].id;
+			var currentTotal = accountsFixture[ 1 ].total;
+			var withdraw = 5;
+
+			this.accountsWidget.openAccountsListPage();
+			this.accountsWidget.withdrawFrom( accountId, withdraw );
+			this.accountsWidget.containsAccount( accountsFixture[ 1 ].currency, currentTotal - withdraw );
+		} );
+
+		it( "doesn't allow withdrawing over the balance limit", function() {
+			var accountId = accountsFixture[ 1 ].id;
+			var currentTotal = accountsFixture[ 1 ].total;
+			var withdraw = currentTotal + 100;
+
+			this.accountsWidget.openAccountsListPage();
+			this.accountsWidget.withdrawFrom( accountId, withdraw );
+			this.accountsWidget.doesntContainAccount( accountsFixture[ 1 ].currency, currentTotal - withdraw );
+			this.accountsWidget.containsError( "have enough money" );
+		} );
+	} );
+
 	afterEach( function( client, done ) {
 		this.application.close( done );
 	} );
