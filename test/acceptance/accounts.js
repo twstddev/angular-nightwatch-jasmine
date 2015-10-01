@@ -114,6 +114,18 @@ describe( "Accounts", function() {
 			this.accountsWidget.containsAccountId( "2" );
 	} );
 
+	describe( "Deposit", function() {
+		it( "allows adding money to an account", function() {
+			var accountId = accountsFixture[ 0 ].id;
+			var currentTotal = accountsFixture[ 0 ].total;
+			var deposit = 80;
+
+			this.accountsWidget.openAccountsListPage();
+			this.accountsWidget.depositTo( accountId, deposit );
+			this.accountsWidget.containsAccount( accountsFixture[ 0 ].currency, currentTotal + deposit );
+		} );
+	} );
+
 	afterEach( function( client, done ) {
 		this.application.close( done );
 	} );

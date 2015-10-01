@@ -1,7 +1,11 @@
 <ul class="accounts">
-	<li class="account" id="account-{{account.id}}" ng-repeat="account in accounts">
+	<li class="account" id="account-{{account.id}}" ng-repeat="account in accounts" ng-init="amount = 0">
 		<strong>{{account.id}}</strong>
 		<em>{{account.currency}}</em>
 		<em>{{account.total}}</em>
+		<div>
+			<input type="number" class="amount-field" ng-model="amount" />
+			<button class="deposit" ng-disabled="!amount" ng-click="depositToAccount(account, amount)">Deposit</button>
+		</div>
 	</li>
 </ul>

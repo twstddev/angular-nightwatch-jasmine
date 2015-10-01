@@ -48,6 +48,11 @@ AccountsWidget.prototype.removeAccount = function( id ) {
 	this.browser.click( this.getAccountSelectorById( id ) + " .remove-account" );
 };
 
+AccountsWidget.prototype.depositTo = function( id, deposit ) {
+	this.setFieldValue( this.getAccountSelectorById( id ) + " .amount-field", deposit );
+	this.browser.click( this.getAccountSelectorById( id ) + " .deposit" );
+};
+
 AccountsWidget.prototype.containsAccount = function( currency, total ) {
 	var accountSelector = [
 		"//*[contains(string(@class), 'account') and",
