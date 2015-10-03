@@ -10,8 +10,7 @@
  * @name CustomersRouter
  * @memberof module:Customers
  */
-module.exports = [ "$stateProvider", "customerIdResolver",
-	function( $stateProvider, customerIdResolver ) {
+module.exports = [ "$stateProvider", function( $stateProvider ) {
 	$stateProvider
 		.state( "customers", {
 			abstract : true,
@@ -35,17 +34,11 @@ module.exports = [ "$stateProvider", "customerIdResolver",
 		.state( "customers.edit", {
 			url : "/:customerId/edit",
 			controller : "CustomersEditController",
-			template : require( "templates/customers/edit.html" ),
-			resolve : {
-				customerId : customerIdResolver
-			}
+			template : require( "templates/customers/edit.html" )
 		} )
 		.state( "customers.show", {
 			url : "/:customerId",
 			controller : "CustomersShowController",
-			template : require( "templates/customers/show.html" ),
-			resolve : {
-				customerId : customerIdResolver
-			}
+			template : require( "templates/customers/show.html" )
 		} );
 } ];

@@ -13,6 +13,7 @@ var AccountsCustomersEditController = require( "./controllers/accounts_customers
 var AccountsIndexController = require( "./controllers/accounts_index" );
 var AccountFieldsDirective = require( "./account_fields_directive" );
 var Accounts = require( "./accounts_resource" );
+var AccountResolver = require( "./account_resolver" );
 
 /**
  * Module  containing accounts resource management functionality.
@@ -26,6 +27,7 @@ angular.module( "accounts", [ angularUiRouter, "ngStorage", "customers" ] )
 	.controller( "AccountsCustomersEditController", AccountsCustomersEditController )
 	.controller( "AccountsIndexController", AccountsIndexController )
 	.directive( "accountFields", AccountFieldsDirective )
-	.factory( "Accounts", Accounts );
+	.factory( "Accounts", Accounts )
+	.factory( "AccountResolver", AccountResolver );
 
 module.exports = "accounts";

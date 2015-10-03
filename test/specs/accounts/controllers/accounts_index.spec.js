@@ -10,15 +10,18 @@ describe( "AccountsIndexController", function() {
 		id : "1",
 		total : 50
 	} ];
+	var transactions;
 
 	beforeEach( angular.mock.module( "accounts" ) );
 
 	beforeEach( angular.mock.inject( function( $rootScope, $controller ) {
+		transactions = [];
 		$scope = $rootScope.$new();
 
 		$controller( "AccountsIndexController", {
 			$scope : $scope,
-			Accounts : accounts
+			Accounts : accounts,
+			Transactions : transactions
 		} );
 	} ) );
 
@@ -27,22 +30,31 @@ describe( "AccountsIndexController", function() {
 		expect( $scope.accounts ).toBe( accounts );
 	} );
 
-	it( "allows depositing money to an account", function() {
-		var account = $scope.accounts[ 0 ];
-		var deposit = 70;
-		var currentTotal = account.total;
 
-		$scope.depositToAccount( account, deposit );
-		expect( account.total ).toBe( deposit + currentTotal );
-	} );
+	describe( "deposit", function() {
+		var account;
+		var deposit;
+		var currentTotal;
 
-	it( "allows withdrawing money from an account", function() {
-		var account = $scope.accounts[ 0 ];
-		var withdraw = 15;
-		var currentTotal = account.total;
+		beforeEach( function() {
+			account = $scope.accounts[ 0 ];
+			deposit = 70;
+			currentTotal = account.total;
+		} );
 
-		$scope.withdrawFromAccount( account, withdraw );
-		expect( account.total ).toBe( currentTotal - withdraw );
+		it( "allows depositing money to an account", function() {
+			$scope.depositToAccount( account, deposit );
+			expect( account.total ).toBe( deposit + currentTotal );
+		} );
+
+		it( "adds deposit transaction to the transactions list", function() {
+			$scope.depositToAccount( account, deposit );
+			expect( transactions[ 0 ] ).toEqual( jasmine.objectContaining( { 
+				accountId : account.id,
+				action : "deposit",
+				amount : deposit
+			} ) );
+		} );
 	} );
 
 	describe( "withdraw", function() {
@@ -56,6 +68,13 @@ describe( "AccountsIndexController", function() {
 			withdraw = currentTotal + 20;
 		} );
 
+		it( "allows withdrawing money from an account", function() {
+			var withdraw = 15;
+
+			$scope.withdrawFromAccount( account, withdraw );
+			expect( account.total ).toBe( currentTotal - withdraw );
+		} );
+
 		it( "doesn't allow withdrawing if account doesn't have enough money", function() {
 			$scope.withdrawFromAccount( account, withdraw );
 			expect( account.total ).toBe( currentTotal );
@@ -65,6 +84,18 @@ describe( "AccountsIndexController", function() {
 			expect( $scope.errors.length ).toBe( 0 );
 			$scope.withdrawFromAccount( account, withdraw );
 			expect( $scope.errors.length ).toBe( 1 );
+		} );
+
+		it( "adds withdraw transaction to the transactions list", function() {
+			var withdraw = 15;
+
+			$scope.withdrawFromAccount( account, withdraw );
+
+			expect( transactions[ 0 ] ).toEqual( jasmine.objectContaining( { 
+				accountId : account.id,
+				action : "withdraw",
+				amount : withdraw
+			} ) );
 		} );
 	} );
 

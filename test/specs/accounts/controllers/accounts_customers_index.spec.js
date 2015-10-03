@@ -32,7 +32,7 @@ describe( "AccountsCustomersIndexController", function() {
 		$controller( "AccountsCustomersIndexController", {
 			$scope : $scope,
 			Accounts : accounts,
-			customerId : "1"
+			CustomerResolver : jasmine.createSpy( "" ).and.returnValue( { id : "1" } )
 		} );
 	} ) );
 

@@ -40,15 +40,6 @@ describe( "AccountsRouter", function() {
 			it( "registers controller", function() {
 				expect( accountsListConfig.controller ).toBeDefined();
 			} );
-
-			it( "resolves customerId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
-				var customerId = "1";
-
-				$state.go( "customers.accounts.list", { customerId : customerId } );
-				$rootScope.$digest();
-
-				expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
-			} ) );
 		} );
 
 		describe( "add", function() {
@@ -70,15 +61,6 @@ describe( "AccountsRouter", function() {
 			it( "registers controller", function() {
 				expect( accountsAddConfig.controller ).toBeDefined();
 			} );
-
-			it( "resolves customerId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
-				var customerId = "1";
-
-				$state.go( "customers.accounts.add", { customerId : customerId } );
-				$rootScope.$digest();
-
-				expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
-			} ) );
 		} );
 
 		describe( "edit", function() {
@@ -100,24 +82,6 @@ describe( "AccountsRouter", function() {
 			it( "registers controller", function() {
 				expect( accountsEditConfig.controller ).toBeDefined();
 			} );
-
-			it( "resolves customerId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
-				var customerId = "1";
-
-				$state.go( "customers.accounts.edit", { customerId : customerId } );
-				$rootScope.$digest();
-
-				expect( $injector.invoke($state.current.resolve.customerId ) ).toBe( customerId );
-			} ) );
-
-			it( "resolves accountId from url", angular.mock.inject( function( $state, $rootScope, $injector ) {
-				var accountId = "1";
-
-				$state.go( "customers.accounts.edit", { accountId : accountId } );
-				$rootScope.$digest();
-
-				expect( $injector.invoke($state.current.resolve.accountId ) ).toBe( accountId );
-			} ) );
 		} );
 	} );
 

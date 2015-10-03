@@ -8,7 +8,12 @@ var angular = require( "angular" );
  * @class AccountsIndexController
  * @memberof module:Accounts
  */
-var AccountsIndexController = function( $scope, Accounts ) {
+var AccountsIndexController = function( $scope, Accounts, Transactions ) {
+	var addTransaction = function( transaction ) {
+		transaction.created = Date.now();
+		Transactions.push( transaction );
+	};
+
 	$scope.accounts = Accounts;
 	$scope.errors = [];
 
@@ -22,7 +27,15 @@ var AccountsIndexController = function( $scope, Accounts ) {
 	 * @memberof module:Accounts.AccountsIndexController
 	 */
 	$scope.depositToAccount = function( account, deposit ) {
+		$scope.clearErrors();
+
 		account.total = ( +account.total ) + ( +deposit );
+
+		addTransaction( {
+			accountId : account.id,
+			amount : deposit,
+			action : "deposit"
+		} );
 	};
 
 	/**
@@ -39,6 +52,12 @@ var AccountsIndexController = function( $scope, Accounts ) {
 
 		if ( ( +withdraw ) <= account.total ) {
 			account.total -= withdraw;
+
+			addTransaction( {
+				accountId : account.id,
+				amount : withdraw,
+				action : "withdraw"
+			} );
 		}
 		else {
 			$scope.errors.push( "Account doesn't have enough money" );
@@ -57,4 +76,4 @@ var AccountsIndexController = function( $scope, Accounts ) {
 	};
 };
 
-module.exports = [ "$scope", "Accounts", AccountsIndexController ];
+module.exports = [ "$scope", "Accounts", "Transactions", AccountsIndexController ];

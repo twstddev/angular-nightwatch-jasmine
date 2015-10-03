@@ -22,8 +22,8 @@ describe( "AccountsCustomersEditController", function() {
 		$controller( "AccountsCustomersEditController", {
 			$scope : $scope,
 			Accounts : accounts,
-			customerId : customerId,
-			accountId : accountId
+			CustomerResolver : jasmine.createSpy( "" ).and.returnValue( { id : customerId } ),
+			AccountResolver : jasmine.createSpy( "" ).and.returnValue( { id : accountId } )
 		} );
 	} ) );
 

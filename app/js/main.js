@@ -4,6 +4,7 @@ var angular = require( "angular" );
 
 var customers = require( "js/customers" );
 var accounts = require( "js/accounts" );
+var transactions = require( "js/transactions" );
 
 /**
  * @description Main application module that bootstraps
@@ -11,7 +12,7 @@ var accounts = require( "js/accounts" );
  *
  * @module app
  */
-angular.module( "app", [ customers, accounts ] )
+angular.module( "app", [ customers, accounts, transactions ] )
 	.config( [ "$localStorageProvider", function( $localStorageProvider ) {
 		$localStorageProvider.setKeyPrefix( "app-" );
 	} ] );

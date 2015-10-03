@@ -7,8 +7,7 @@
  * @name AccountsRouter
  * @memberof module:Accounts
  */
-module.exports = [ "$stateProvider", "customerIdResolver",
-	function( $stateProvider, customerIdResolver ) {
+module.exports = [ "$stateProvider", function( $stateProvider ) {
 	$stateProvider
 		.state( "customers.accounts", {
 			abstract : true,
@@ -18,29 +17,17 @@ module.exports = [ "$stateProvider", "customerIdResolver",
 		.state( "customers.accounts.list", {
 			url : "",
 			controller : "AccountsCustomersIndexController",
-			template : require( "templates/accounts/customers_index.html" ),
-			resolve : {
-				customerId : customerIdResolver
-			}
+			template : require( "templates/accounts/customers_index.html" )
 		} )
 		.state( "customers.accounts.add", {
 			url : "/add",
 			controller : "AccountsCustomersAddController",
-			template : require( "templates/accounts/customers_add.html" ),
-			resolve : {
-				customerId : customerIdResolver
-			}
+			template : require( "templates/accounts/customers_add.html" )
 		} )
 		.state( "customers.accounts.edit", {
 			url : "/:accountId/edit",
 			controller : "AccountsCustomersEditController",
 			template : require( "templates/accounts/customers_edit.html" ),
-			resolve : {
-				customerId : customerIdResolver,
-				accountId : [ "$stateParams", function( $stateParams ) {
-					return $stateParams.accountId;
-				} ]
-			}
 		} )
 		.state( "accounts", {
 			url : "/accounts",

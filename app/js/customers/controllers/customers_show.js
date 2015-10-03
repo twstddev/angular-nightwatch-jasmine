@@ -9,8 +9,8 @@ var _ = require( "lodash" );
  * @class CustomersShowController
  * @memberof module:Customers
  */
-var CustomersShowController = function( $scope, Customers, customerId ) {
-	$scope.customer = _.findWhere( Customers, { id : customerId } );
+var CustomersShowController = function( $scope, CustomerResolver) {
+	$scope.customer = CustomerResolver();
 };
 
-module.exports = [ "$scope", "Customers", "customerId", CustomersShowController ];
+module.exports = [ "$scope", "CustomerResolver", CustomersShowController ];

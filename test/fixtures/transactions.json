@@ -1,0 +1,20 @@
+[
+	{
+		"id" : "1",
+		"accountId" : "1",
+		"action" : "deposit",
+		"amount" : "100"
+	},
+	{
+		"id" : "2",
+		"accountId" : "1",
+		"action" : "withdraw",
+		"amount" : "20"
+	},
+	{
+		"id" : "3",
+		"accountId" : "2",
+		"action" : "deposit",
+		"amount" : "40"
+	}
+]

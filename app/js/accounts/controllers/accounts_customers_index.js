@@ -10,8 +10,8 @@ var _ = require( "lodash" );
  * @class AccountsCustomersIndexController
  * @memberof module:Accounts
  */
-var AccountsCustomersIndexController = function( $scope, Accounts, customerId ) {
-	$scope.accounts = _.where( Accounts, { customerId : customerId } );
+var AccountsCustomersIndexController = function( $scope, Accounts, CustomerResolver ) {
+	$scope.accounts = _.where( Accounts, { customerId : CustomerResolver().id } );
 
 	/**
 	 * Removes given account from the list of accounts.
@@ -25,4 +25,4 @@ var AccountsCustomersIndexController = function( $scope, Accounts, customerId ) 
 	};
 };
 
-module.exports = [ "$scope", "Accounts", "customerId", AccountsCustomersIndexController ];
+module.exports = [ "$scope", "Accounts", "CustomerResolver", AccountsCustomersIndexController ];

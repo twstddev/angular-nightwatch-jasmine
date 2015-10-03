@@ -9,11 +9,11 @@ var guid = require( "guid" );
  * @class AccountsCustomersAddController
  * @memberof module:Accounts
  */
-var AccountsCustomersAddController = function( $scope, Accounts, customerId, $state ) {
+var AccountsCustomersAddController = function( $scope, Accounts, CustomerResolver, $state ) {
 	$scope.account = {
 		id : guid.raw(),
 		total : 0,
-		customerId : customerId
+		customerId : CustomerResolver().id
 	};
 	
 	/**
@@ -35,6 +35,6 @@ var AccountsCustomersAddController = function( $scope, Accounts, customerId, $st
 module.exports = [ 
 	"$scope",
 	"Accounts",
-	"customerId",
+	"CustomerResolver",
 	"$state",
 	AccountsCustomersAddController ];

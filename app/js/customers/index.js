@@ -11,7 +11,7 @@ var CustomersEditController = require( "./controllers/customers_edit" );
 var CustomersShowController = require( "./controllers/customers_show" );
 var CustomerFieldsDirective = require( "./customer_fields_directive" );
 var Customers = require( "./customers_resource" );
-var customerIdResolver = require( "./id_resolver" );
+var CustomerResolver = require( "./customer_resolver" );
 
 /**
  * Module containing customers resource management functionality.
@@ -19,13 +19,13 @@ var customerIdResolver = require( "./id_resolver" );
  * @module Customers
  */
 angular.module( "customers", [ angularUiRouter, "ngStorage" ] )
-	.constant( "customerIdResolver", customerIdResolver )
 	.config( CustomersRouter )
 	.controller( "CustomersIndexController", CustomersIndexController )
 	.controller( "CustomersAddController", CustomersAddController )
 	.controller( "CustomersEditController", CustomersEditController )
 	.controller( "CustomersShowController", CustomersShowController )
 	.directive( "customerFields", CustomerFieldsDirective )
-	.factory( "Customers", Customers );
+	.factory( "Customers", Customers )
+	.factory( "CustomerResolver", CustomerResolver );
 
 module.exports = "customers";

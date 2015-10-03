@@ -9,8 +9,8 @@ var _ = require( "lodash" );
  * @class CustomersEditController
  * @memberof module:Customers
  */
-var CustomersEditController = function( $scope, Customers, customerId, $state ) {
-	var originalCustomer = _.findWhere( Customers, { id : customerId } );
+var CustomersEditController = function( $scope, CustomerResolver, $state ) {
+	var originalCustomer = CustomerResolver();
 
 	$scope.customer = angular.copy( originalCustomer );
 
@@ -31,7 +31,6 @@ var CustomersEditController = function( $scope, Customers, customerId, $state ) 
 
 module.exports = [ 
 	"$scope",
-	"Customers",
-	"customerId",
+	"CustomerResolver",
 	"$state",
 	CustomersEditController ];

@@ -16,7 +16,7 @@ describe( "AccountsCustomersAddController", function() {
 		$controller( "AccountsCustomersAddController", {
 			$scope : $scope,
 			Accounts : accounts,
-			customerId : 1
+			CustomerResolver : jasmine.createSpy( "" ).and.returnValue( { id : "1" } )
 		} );
 	} ) );
 
@@ -29,7 +29,7 @@ describe( "AccountsCustomersAddController", function() {
 	} );
 
 	it( "add currently selected customer id to account", function() {
-		expect( $scope.account.customerId ).toBe( 1 );
+		expect( $scope.account.customerId ).toBe( "1" );
 	} );
 
 	it( "adds created account to the accounts list", function() {

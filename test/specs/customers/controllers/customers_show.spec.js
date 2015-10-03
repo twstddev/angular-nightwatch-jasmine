@@ -18,8 +18,7 @@ describe( "CustomersShowController", function() {
 
 		$controller( "CustomersShowController", {
 			$scope : $scope,
-			Customers : customers,
-			customerId : customers[ 0 ].id
+			CustomerResolver : jasmine.createSpy( "" ).and.returnValue( customers[ 0 ] )
 		} );
 	} ) );
 
