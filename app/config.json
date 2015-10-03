@@ -1,0 +1,31 @@
+{
+	"users" : [
+		{
+			"username" : "bank",
+			"role" : "bank",
+			"id" : "1"
+		},
+		{
+			"username" : "customer",
+			"email" : "customer@user.org",
+			"firstName" : "name",
+			"lastName" : "name",
+			"role": "customer",
+			"id" : "2"
+		}
+	],
+
+	"roles" : {
+		"customer" : {
+			"password" : "123456",
+			"default_state" : "accounts",
+			"permissions" : [ "accounts" ]
+		},
+
+		"bank" : {
+			"password" : "123456",
+			"default_state" : "customers.list",
+			"permissions" : [ "customers" ]
+		}
+	}
+}

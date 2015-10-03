@@ -22,7 +22,4 @@ LocalStorageInjector.prototype.addTransactions = function( transactions ) {
 	this.loadResource( "transactions", transactions );
 };
 
-
-
-
 module.exports = LocalStorageInjector;

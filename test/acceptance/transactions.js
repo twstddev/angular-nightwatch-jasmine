@@ -11,14 +11,17 @@ describe( "Transactions", function() {
 
 		this.accountsWidget = new client.globals.AccountsWidget( client );
 		this.transactionsWidget = new client.globals.TransactionWidget( client );
+		this.loginWidget = new client.globals.LoginWidget( client );
 
 		this.storage.addAccounts( accountsFixture );
 		this.storage.addTransactions( transactionsFixture );
 
+		this.loginWidget.loginAsCustomer();
+
 		done();
 	} );
 
-	it( "displays a list of transactions for account", function() {
+	it( "displays a list of transactions for account", function(client) {
 		this.transactionsWidget.openListPageForAccount( "1" );
 
 		this.transactionsWidget.containsTransaction( "£100" );

@@ -1,0 +1,22 @@
+<form name="form" novalidate ng-submit="login()">
+	<div class="errors" ng-if="form.$submitted && form.$invalid">
+		<p class="alert" ng-if="form.username.$invalid">
+			Username is required
+		</p>
+		<p class="alert" ng-if="form.password.$invalid">
+			Password is required
+		</p>
+	</div>
+	<p class="alert" ng-if="error">
+		{{error}}
+	</p>
+	<div class="input-group">
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" required ng-model="username" />
+	</div>
+	<div class="input-group">
+		<label for="username">Password:</label>
+		<input type="password" id="password" name="password" required ng-model="password" />
+	</div>
+	<button type="submit" class="login">Login</button>
+</form>

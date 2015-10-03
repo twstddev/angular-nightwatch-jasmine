@@ -8,6 +8,7 @@ var Application = function( browser ) {
 
 Application.prototype.open = function() {
 	this.browser.init();
+	this.browser.urlHash( "login" );
 };
 
 Application.prototype.close = function( done ) {

@@ -11,6 +11,9 @@ module.exports = [ "$stateProvider", function( $stateProvider ) {
 	$stateProvider
 		.state( "transactions", {
 			url : "/accounts/:accountId/transactions",
+			data : {
+				level : "accounts"
+			},
 			views : {
 				main : {
 					template : require( "templates/transactions/index.html" ),

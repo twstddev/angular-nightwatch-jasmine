@@ -8,6 +8,7 @@ module.exports = {
 	AccountsWidget : require( "./widgets/accounts" ),
 	TransactionWidget : require( "./widgets/transactions" ),
 	TransferWidget : require( "./widgets/transfer" ),
+	LoginWidget : require( "./widgets/login" ),
 
 	waitForConditionTimeout : 5000
 };

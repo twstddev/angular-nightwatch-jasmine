@@ -12,7 +12,10 @@
 		<!-- endbuild -->
 	</head>
 	<body>
-		<main ui-view="main"></main>
+		<div ui-view="document">
+			<main ui-view="main"></main>
+		</div>
+
 		<!-- build:js js/main.js -->
 		<script src="build/js/bundle.js"></script>
 		<!-- endbuild -->

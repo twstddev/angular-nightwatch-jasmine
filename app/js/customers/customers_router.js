@@ -15,6 +15,9 @@ module.exports = [ "$stateProvider", function( $stateProvider ) {
 		.state( "customers", {
 			abstract : true,
 			url : "/customers",
+			data : {
+				level : "customers"
+			},
 			views : {
 				main : {
 					template : "<ui-view/>"

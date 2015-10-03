@@ -12,7 +12,10 @@ module.exports = [ "$stateProvider", function( $stateProvider ) {
 		.state( "customers.accounts", {
 			abstract : true,
 			url : "/:customerId/accounts",
-			template : "<ui-view/>"
+			template : "<ui-view/>",
+			data : {
+				level : "customers"
+			}
 		} )
 		.state( "customers.accounts.list", {
 			url : "",
@@ -31,6 +34,9 @@ module.exports = [ "$stateProvider", function( $stateProvider ) {
 		} )
 		.state( "accounts", {
 			url : "/accounts",
+			data : {
+				level : "accounts"
+			},
 			views : {
 				main : {
 					template : require( "templates/accounts/index.html" ),
