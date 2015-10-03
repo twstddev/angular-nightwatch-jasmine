@@ -3,24 +3,28 @@
 		"id" : "1",
 		"currency" : "£",
 		"total" : 0,
-		"customerId" : "1"
+		"customerId" : "1",
+		"overdraft" : 0
 	},
 	{
 		"id" : "2",
 		"currency" : "$",
 		"total" : 20,
-		"customerId" : "1"
+		"customerId" : "1",
+		"overdraft" : 0
 	},
 	{
 		"id" : "3",
 		"currency" : "£",
 		"total" : 10,
-		"customerId" : "2"
+		"customerId" : "2",
+		"overdraft" : 200 
 	},
 	{
 		"id" : "4",
 		"currency" : "$",
 		"total" : 5,
-		"customerId" : "2"
+		"customerId" : "2",
+		"overdraft" : 0
 	}
 ]

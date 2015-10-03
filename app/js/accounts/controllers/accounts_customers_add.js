@@ -13,7 +13,8 @@ var AccountsCustomersAddController = function( $scope, Accounts, CustomerResolve
 	$scope.account = {
 		id : guid.raw(),
 		total : 0,
-		customerId : CustomerResolver().id
+		customerId : CustomerResolver().id,
+		overdraft : 0
 	};
 	
 	/**

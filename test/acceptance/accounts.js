@@ -147,6 +147,16 @@ describe( "Accounts", function() {
 			this.accountsWidget.doesntContainAccount( accountsFixture[ 1 ].currency, currentTotal - withdraw );
 			this.accountsWidget.containsError( "have enough money" );
 		} );
+
+		it( "allows withdrawing when not enoung money but overdraft allowed", function() {
+			var accountId = accountsFixture[ 2 ].id;
+			var currentTotal = accountsFixture[ 2 ].total;
+			var withdraw = currentTotal + 100;
+
+			this.accountsWidget.openAccountsListPage();
+			this.accountsWidget.withdrawFrom( accountId, withdraw );
+			this.accountsWidget.containsAccount( accountsFixture[ 2 ].currency, currentTotal - withdraw );
+		} );
 	} );
 
 	afterEach( function( client, done ) {

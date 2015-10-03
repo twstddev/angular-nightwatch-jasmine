@@ -48,9 +48,10 @@ var AccountsIndexController = function( $scope, Accounts, Transactions ) {
 	 * @memberof module:Accounts.AccountsIndexController
 	 */
 	$scope.withdrawFromAccount = function( account, withdraw ) {
+		var totalWithOverdraft = account.total + ( +account.overdraft );
 		$scope.clearErrors();
 
-		if ( ( +withdraw ) <= account.total ) {
+		if ( ( +withdraw ) <= totalWithOverdraft ) {
 			account.total -= withdraw;
 
 			addTransaction( {

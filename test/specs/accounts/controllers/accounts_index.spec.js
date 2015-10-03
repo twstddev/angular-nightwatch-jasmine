@@ -6,10 +6,18 @@ require( "accounts" );
 
 describe( "AccountsIndexController", function() {
 	var $scope;
-	var accounts = [ {
-		id : "1",
-		total : 50
-	} ];
+	var accounts = [
+		{
+			id : "1",
+			total : 50,
+			overdraft : 0
+		},
+		{
+			id : "2",
+			total: 20,
+			overdraft: 30
+		}
+	];
 	var transactions;
 
 	beforeEach( angular.mock.module( "accounts" ) );
@@ -98,6 +106,16 @@ describe( "AccountsIndexController", function() {
 			} ) );
 		} );
 	} );
+
+	it( "allows withdrawing if not enough money but allowed overdraft", function() {
+		var account = accounts[ 1 ];
+		var withdraw = 40;
+		var currentTotal = account.total;
+		
+		$scope.withdrawFromAccount( account, withdraw );
+		expect( account.total ).toBe( currentTotal - withdraw );
+	} );
+
 
 	it( "removes messages from the errors list", function() {
 		$scope.errors.push( {} );
