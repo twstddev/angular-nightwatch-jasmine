@@ -122,4 +122,16 @@ describe( "AccountsIndexController", function() {
 		$scope.clearErrors();
 		expect( $scope.errors.length ).toBe( 0 );
 	} );
+
+	it( "resets accounts total and transactions for the accounts", function() {
+		transactions.push( { accountId : "1" } );
+		transactions.push( { accountId : "3" } );
+		$scope.accounts = [ $scope.accounts[ 0 ] ];
+
+		$scope.resetAccounts();
+
+		expect( transactions.length ).toBe( 1 );
+		expect( transactions[ 0 ].accountId ).toBe( "3" );
+		expect( $scope.accounts[ 0 ].total ).toBe( 0 );
+	} );
 } );

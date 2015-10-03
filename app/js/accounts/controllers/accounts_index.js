@@ -1,6 +1,7 @@
 "use strict";
 
 var angular = require( "angular" );
+var _ = require( "lodash" );
 
 /**
  * Implements accounts controller that handles generic accounts index page.
@@ -74,6 +75,20 @@ var AccountsIndexController = function( $scope, Accounts, Transactions ) {
 	 */
 	$scope.clearErrors = function() {
 		$scope.errors = [];
+	};
+
+	/**
+	 * Resets current customer accounts totals and transactions.
+	 *
+	 * @inner
+	 * @function reset
+	 * @memberof module:Accounts.AccountsIndexController
+	 */
+	$scope.resetAccounts = function() {
+		$scope.accounts.forEach( function( account ) {
+			account.total = 0;
+			_.remove( Transactions, _.matches( { accountId : account.id } ) );
+		} );
 	};
 };
 

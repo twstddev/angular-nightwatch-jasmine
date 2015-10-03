@@ -58,6 +58,10 @@ AccountsWidget.prototype.withdrawFrom = function( id, withdraw ) {
 	this.browser.click( this.getAccountSelectorById( id ) + " .withdraw" );
 };
 
+AccountsWidget.prototype.resetAccounts = function() {
+	this.browser.click( ".reset-accounts" );
+};
+
 AccountsWidget.prototype.containsAccount = function( currency, total ) {
 	this.browser
 		.useXpath()

@@ -2,6 +2,7 @@
 
 var customersFixture = require( "../fixtures/customers.json" );
 var accountsFixture = require( "../fixtures/accounts.json" );
+var transactionsFixture = require( "../fixtures/transactions.json" );
 
 describe( "Accounts", function() {
 	beforeEach( function( client, done ) {
@@ -10,9 +11,11 @@ describe( "Accounts", function() {
 		this.application.open();
 
 		this.accountsWidget = new client.globals.AccountsWidget( client );
+		this.transactionsWidget = new client.globals.TransactionWidget( client );
 
 		this.storage.addCustomers( customersFixture );
 		this.storage.addAccounts( accountsFixture );
+		this.storage.addTransactions( transactionsFixture );
 
 		done();
 	} );
@@ -157,6 +160,17 @@ describe( "Accounts", function() {
 			this.accountsWidget.withdrawFrom( accountId, withdraw );
 			this.accountsWidget.containsAccount( accountsFixture[ 2 ].currency, currentTotal - withdraw );
 		} );
+	} );
+
+	it( "resets accounts total and transactions when reset button clicked", function() {
+		var account = accountsFixture[ 1 ];
+		this.accountsWidget.openAccountsListPage();
+		this.accountsWidget.resetAccounts();
+
+		this.accountsWidget.doesntContainAccount( account.currency, account.total );
+
+		this.transactionsWidget.openListPageForAccount( account.id );
+		this.transactionsWidget.doesntContainTransaction( "$40" );
 	} );
 
 	afterEach( function( client, done ) {
