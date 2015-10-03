@@ -1,0 +1,43 @@
+<form name="form" novaidate>
+	<div class="input-group from">
+		<label>From:</label>
+		<select 
+			name="from-customer" 
+			id="from-customer" 
+			ng-options="customer.username for customer in customers track by customer.id" 
+			ng-model="from.customer" required>
+		</select>
+		<select 
+			name="from-account" 
+			id="from-account" 
+			ng-if="from.customer"
+			ng-options="account.id for account in getAccountsForCustomer(from.customer) track by account.id"
+			ng-model="from.account"
+			required>
+		</select>
+		<div class="available" ng-if="from.account">
+			<strong>Amount:</strong><em>{{from.account.total}}</em>
+		</div>
+	</div>
+	<div class="input-group to">
+		<label>To:</label>
+		<select 
+			name="to-customer" 
+			id="to-customer" 
+			ng-options="customer.username for customer in customers track by customer.id" 
+			ng-model="to.customer" required>
+		</select>
+		<select 
+			name="to-account" 
+			id="to-account"
+			ng-if="to.customer"
+			ng-options="account.id for account in getAccountsForCustomer(to.customer) track by account.id"
+			ng-model="to.account"
+			required>
+		</select>
+	</div>
+	<div class="input-group">
+		<input type="number" id="amount" name="amount" ng-model="amount" ng-max="from.account.total" required />
+		<button class="transfer" ng-disabled="form.$invalid" ng-click="transfer(amount)">Transfer</button>
+	</div>
+</form>

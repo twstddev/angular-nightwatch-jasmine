@@ -2,7 +2,7 @@
 
 /**
  * A router that registers and manages following routes:
- * - __/account/:accountId/transactions - index page containing transactions for the given account
+ * - __/account/:accountId/transactions__ - index page containing transactions for the given account
  *
  * @name TransactionsRouter
  * @memberof module:Transactions
