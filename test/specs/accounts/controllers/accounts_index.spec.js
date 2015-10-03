@@ -10,12 +10,20 @@ describe( "AccountsIndexController", function() {
 		{
 			id : "1",
 			total : 50,
-			overdraft : 0
+			overdraft : 0,
+			customerId : "1"
 		},
 		{
 			id : "2",
 			total: 20,
-			overdraft: 30
+			overdraft: 30,
+			customerId : "1"
+		},
+		{
+			id : "3",
+			total: 20,
+			overdraft: 0,
+			customerId : "2"
 		}
 	];
 	var transactions;
@@ -29,13 +37,18 @@ describe( "AccountsIndexController", function() {
 		$controller( "AccountsIndexController", {
 			$scope : $scope,
 			Accounts : accounts,
-			Transactions : transactions
+			Transactions : transactions,
+			AuthenticationService : {
+				user : {
+					id : "1"
+				}
+			}
 		} );
 	} ) );
 
 	it( "creates a list of accounts when initialised", function() {
 		expect( $scope.accounts ).toBeDefined();
-		expect( $scope.accounts ).toBe( accounts );
+		expect( $scope.accounts.length ).toBe( 2 );
 	} );
 
 
@@ -133,5 +146,9 @@ describe( "AccountsIndexController", function() {
 		expect( transactions.length ).toBe( 1 );
 		expect( transactions[ 0 ].accountId ).toBe( "3" );
 		expect( $scope.accounts[ 0 ].total ).toBe( 0 );
+	} );
+
+	it( "displays accounts only for currently logged in customer", function() {
+		expect( $scope.accounts.every( function( a ) { return a.customerId === "1"; } ) ).toBeTruthy();
 	} );
 } );

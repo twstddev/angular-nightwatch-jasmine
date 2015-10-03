@@ -9,13 +9,13 @@ var _ = require( "lodash" );
  * @class AccountsIndexController
  * @memberof module:Accounts
  */
-var AccountsIndexController = function( $scope, Accounts, Transactions ) {
+var AccountsIndexController = function( $scope, Accounts, Transactions, AuthenticationService ) {
 	var addTransaction = function( transaction ) {
 		transaction.created = Date.now();
 		Transactions.push( transaction );
 	};
 
-	$scope.accounts = Accounts;
+	$scope.accounts = _.where( Accounts, { customerId : AuthenticationService.user.id } );
 	$scope.errors = [];
 
 	/**
@@ -92,4 +92,4 @@ var AccountsIndexController = function( $scope, Accounts, Transactions ) {
 	};
 };
 
-module.exports = [ "$scope", "Accounts", "Transactions", AccountsIndexController ];
+module.exports = [ "$scope", "Accounts", "Transactions", "AuthenticationService", AccountsIndexController ];
