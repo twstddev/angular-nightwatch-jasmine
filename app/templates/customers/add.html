@@ -1,6 +1,17 @@
+<h3>
+	<i class="fa fa-plus"></i>
+	Add New Customer
+</h3>
 <form name="form" novalidate>
 	<customer-fields></customer-fields>
-	<button type="submit" class="add-customer" ng-click="form.$valid && createCustomer()">
-		Add
-	</button>
+	<div class="pull-right">
+		<button type="submit" class="add-customer btn btn-success" ng-click="form.$valid && createCustomer()">
+			<i class="fa fa-plus"></i>
+			Add
+		</button>
+		<a class="btn btn-danger" ui-sref="customers.list">
+			<i class="fa fa-remove"></i>
+			Cancel
+		</a>
+	</div>
 </form>

@@ -25,7 +25,7 @@
 		"bank" : {
 			"password" : "123456",
 			"default_state" : "customers.list",
-			"permissions" : [ "customers" ]
+			"permissions" : [ "customers", "transfer" ]
 		}
 	}
 }

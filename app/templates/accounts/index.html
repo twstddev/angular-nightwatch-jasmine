@@ -1,16 +1,56 @@
-<button class="reset-accounts" ng-click="resetAccounts()">Reset accounts</button>
-<p class="alert" ng-repeat="error in errors">
+<h2>
+	Account
+	<button class="reset-accounts btn btn-danger btn-sm pull-right" ng-click="resetAccounts()">
+		<i class="fa fa-refresh"></i>
+		Reset accounts
+	</button>
+</h2>
+<p class="alert alert-danger" ng-repeat="error in errors">
 	{{error}}
 </p>
-<ul class="accounts">
-	<li class="account" id="account-{{account.id}}" ng-repeat="account in accounts" ng-init="amount = 0">
-		<strong>{{account.id}}</strong>
-		<em>{{account.currency}}</em>
-		<em>{{account.total}}</em>
-		<div>
-			<input type="number" class="amount-field" ng-model="amount" />
-			<button class="deposit" ng-disabled="!amount" ng-click="depositToAccount(account, amount)">Deposit</button>
-			<button class="withdraw" ng-disabled="!amount" ng-click="withdrawFromAccount(account, amount)">Withdraw</button>
-		</div>
-	</li>
-</ul>
+<table class="table table-bordered table-striped table-condensed" class="accounts">
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Currency
+			</th>
+			<th>
+				Total
+			</th>
+			<th>
+			</th>
+			<th>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="account" id="account-{{account.id}}" ng-repeat="account in accounts" ng-init="amount = 0">
+			<td>{{account.id}}</td>
+			<td>{{account.currency}}</td>
+			<td>{{account.currency}}{{account.total}}</td>
+			<td class="account-actions text-center">
+				<label for="">Amount:</label>
+				<input type="number" class="amount-field form-control input-sm" ng-model="amount" />
+				<button class="deposit btn btn-success btn-sm" ng-disabled="!amount" ng-click="depositToAccount(account, amount)">
+					<i class="fa fa-plus"></i>
+					&nbsp;
+					Deposit
+				</button>
+				<button class="withdraw btn btn-danger btn-sm" ng-disabled="!amount" ng-click="withdrawFromAccount(account, amount)">
+					<i class="fa fa-minus"></i>
+					&nbsp;
+					Withdraw
+				</button>
+			</td>
+			<td class="text-center">
+				<a class="btn btn-info btn-sm" ui-sref="transactions( { accountId : account.id } )">
+					<i class="fa fa-money"></i>
+					Transactions
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

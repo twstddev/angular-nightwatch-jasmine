@@ -6,5 +6,6 @@ dist/
 .DS_Store
 app/css/
 app/build/
+app/assets/fonts/
 coverage/
 docs/

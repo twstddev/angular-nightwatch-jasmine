@@ -1,18 +1,28 @@
 <div>
 	<div class="errors" ng-if="form.$submitted">
-		<p class="alert" ng-if="form.currency.$invalid && form.currency.$error.required">Currency is required</p>
-		<p class="alert" ng-if="form.total.$invalid && form.total.$error.required">Total is required</p>
+		<p class="alert alert-danger" ng-if="form.currency.$invalid && form.currency.$error.required">
+			Currency is required
+		</p>
+		<p class="alert alert-danger" ng-if="form.total.$invalid && form.total.$error.required">
+			Total is required
+		</p>
 	</div>
-	<div class="input-group">
-		<label for="currency">Currency:</label>
-		<input type="text" id="currency" ng-model="account.currency" name="currency" required />
-	</div>
-	<div class="input-group">
-		<label for="total">Total:</label>
-		<input type="number" id="total" ng-model="account.total" name="total" required />
-	</div>
-	<div class="input-group">
-		<label for="overdraft">Overdraft:</label>
-		<input type="number" id="overdraft" ng-model="account.overdraft" name="overdraft" />
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-group" ng-class="{'has-error' : form.$submitted && form.currency.$invalid}">
+				<label for="currency">Currency:</label>
+				<input type="text" id="currency" ng-model="account.currency" name="currency" required class="form-control" />
+			</div>
+			<div class="form-group" ng-class="{'has-error' : form.$submitted && form.total.$invalid}">
+				<label for="total">Total:</label>
+				<input type="number" id="total" ng-model="account.total" name="total" required class="form-control" />
+			</div>
+			</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label for="overdraft">Overdraft:</label>
+				<input type="number" id="overdraft" ng-model="account.overdraft" name="overdraft" class="form-control" />
+			</div>
+		</div>
 	</div>
 </div>

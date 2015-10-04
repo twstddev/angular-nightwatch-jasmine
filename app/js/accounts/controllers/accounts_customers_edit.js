@@ -10,7 +10,8 @@ var _ = require( "lodash" );
  * @memberof module:Accounts
  */
 var AccountsCustomersEditController = function( $scope, Accounts, CustomerResolver, AccountResolver, $state ) {
-	var originalAccount = _.findWhere( Accounts, { id : AccountResolver().id, customerId : CustomerResolver().id } );
+	$scope.customer = CustomerResolver();
+	var originalAccount = _.findWhere( Accounts, { id : AccountResolver().id, customerId : $scope.customer.id } );
 
 	$scope.account = angular.copy( originalAccount );
 

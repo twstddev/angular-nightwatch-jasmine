@@ -11,6 +11,9 @@ module.exports = [ "$stateProvider", function( $stateProvider ) {
 	$stateProvider
 		.state( "transfer", {
 			url : "/transfer",
+			data : {
+				level : "transfer"
+			},
 			views : {
 				main : {
 					template : require( "templates/transfer/index.html" ),

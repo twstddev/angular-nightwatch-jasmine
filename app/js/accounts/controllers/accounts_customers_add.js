@@ -10,10 +10,11 @@ var guid = require( "guid" );
  * @memberof module:Accounts
  */
 var AccountsCustomersAddController = function( $scope, Accounts, CustomerResolver, $state ) {
+	$scope.customer = CustomerResolver();
 	$scope.account = {
 		id : guid.raw(),
 		total : 0,
-		customerId : CustomerResolver().id,
+		customerId : $scope.customer.id,
 		overdraft : 0
 	};
 	

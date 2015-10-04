@@ -1,8 +1,53 @@
-<ul class="accounts">
-	<li class="account" id="account-{{account.id}}" ng-repeat="account in accounts">
-		<strong>{{account.id}}</strong>
-		<em>{{account.currency}}</em>
-		<em>{{account.total}}</em>
-		<button class="remove-account" ng-click="removeAccount(account)">Remove</button>
-	</li>
-</ul>
+<h2>
+	Accounts for {{customer.username}}
+	<div class="pull-right">
+		<a class="btn btn-info btn-sm" ui-sref="customers.list">
+			<i class="fa fa-user"></i>
+			Customers
+		</a>
+		<button class="btn btn-success btn-sm add-client" ui-sref="customers.accounts.add( { customerId : customer.id } )">
+			<i class="fa fa-plus"></i>
+			Add New Account
+		</button>
+	</div>
+</h2>
+<table class="table table-bordered table-striped table-condensed">
+	<thead>
+		<tr>
+			<th>
+				ID
+			</th>
+			<th>
+				Currency
+			</th>
+			<th>
+				Total
+			</th>
+			<th>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="account" id="account-{{account.id}}" ng-repeat="account in accounts">
+			<td>
+				{{account.id}}
+			</td>
+			<td>
+				{{account.currency}}
+			</td>
+			<td>
+				{{account.currency}}{{account.total}}
+			</td>
+			<td class="actions text-center">
+				<a class="btn btn-warning btn-xs" ui-sref="customers.accounts.edit( { customerId : customer.id, accountId : account.id } )">
+					<i class="fa fa-edit"></i>
+					Edit
+				</a>
+				<button class="remove-customer btn btn-xs btn-danger" ng-click="removeAccount(account)">
+					<i class="fa fa-remove"></i>
+					Remove
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

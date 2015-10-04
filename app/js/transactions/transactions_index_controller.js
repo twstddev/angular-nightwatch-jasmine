@@ -11,14 +11,13 @@ var _ = require( "lodash" );
  * @memberof module:Transactions
  */
 var TransactionsIndexController = function( $scope, Transactions, AccountResolver ) {
-	var account = AccountResolver();
-	var currency = account.currency;
+	$scope.account = AccountResolver();
+	var accountId = $scope.account.id;
+	var currency = $scope.account.currency;
 	var amountTransforms = {
 		deposit : function( amount ) { return currency + amount; },
 		withdraw : function( amount ) { return "-" + currency + amount; }
 	};
-
-	$scope.transactions = _.where( Transactions, { accountId : account.id } );
 
 	/**
 	 * Returns formatted amount for the given transaction.
@@ -30,6 +29,15 @@ var TransactionsIndexController = function( $scope, Transactions, AccountResolve
 	$scope.getTransactionAmount = function( transaction ) {
 		return amountTransforms[ transaction.action ]( transaction.amount );
 	};
+
+	$scope.transactions = _.where( Transactions, { accountId : accountId } )
+		.map( function( transaction ) {
+			return {
+				accountId : accountId,
+				created : new Date( transaction.created ),
+				amount : $scope.getTransactionAmount( transaction )
+			};
+		} );
 };
 
 module.exports = [ "$scope", "Transactions", "AccountResolver", TransactionsIndexController ];

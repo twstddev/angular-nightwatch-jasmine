@@ -1,43 +1,77 @@
+<h2>
+	<i class="fa fa-money"></i>
+	Transfer money
+</h2>
 <form name="form" novaidate>
-	<div class="input-group from">
-		<label>From:</label>
-		<select 
-			name="from-customer" 
-			id="from-customer" 
-			ng-options="customer.username for customer in customers track by customer.id" 
-			ng-model="from.customer" required>
-		</select>
-		<select 
-			name="from-account" 
-			id="from-account" 
-			ng-if="from.customer"
-			ng-options="account.id for account in getAccountsForCustomer(from.customer) track by account.id"
-			ng-model="from.account"
-			required>
-		</select>
-		<div class="available" ng-if="from.account">
-			<strong>Amount:</strong><em>{{from.account.total}}</em>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="from">
+				<div class="form-group">
+					<label>From:</label>
+					<select 
+						class="form-control"
+						name="from-customer" 
+						id="from-customer" 
+						ng-options="customer.username for customer in customers track by customer.id" 
+						ng-model="from.customer" required>
+					</select>
+				</div>
+				<div class="form-group">
+					<select 
+						class="form-control"
+						name="from-account" 
+						id="from-account" 
+						ng-if="from.customer"
+						ng-options="account.id for account in getAccountsForCustomer(from.customer) track by account.id"
+						ng-model="from.account"
+						required>
+					</select>
+				</div>
+				<div class="available" ng-if="from.account">
+					<kbd><strong>Account total:</strong>{{from.account.currency}}{{from.account.total}}</kbd>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="input-group to">
-		<label>To:</label>
-		<select 
-			name="to-customer" 
-			id="to-customer" 
-			ng-options="customer.username for customer in customers track by customer.id" 
-			ng-model="to.customer" required>
-		</select>
-		<select 
-			name="to-account" 
-			id="to-account"
-			ng-if="to.customer"
-			ng-options="account.id for account in getAccountsForCustomer(to.customer) track by account.id"
-			ng-model="to.account"
-			required>
-		</select>
-	</div>
-	<div class="input-group">
-		<input type="number" id="amount" name="amount" ng-model="amount" ng-max="from.account.total" required />
-		<button class="transfer" ng-disabled="form.$invalid" ng-click="transfer(amount)">Transfer</button>
+		<div class="col-md-4">
+			<div class="to">
+				<div class="form-group">
+					<label>To:</label>
+					<select 
+						class="form-control"
+						name="to-customer" 
+						id="to-customer" 
+						ng-options="customer.username for customer in customers track by customer.id" 
+						ng-model="to.customer" required>
+					</select>
+				</div>
+				<div class="form-group">
+					<select 
+						class="form-control"
+						name="to-account" 
+						id="to-account"
+						ng-if="to.customer"
+						ng-options="account.id for account in getAccountsForCustomer(to.customer) track by account.id"
+						ng-model="to.account"
+						required>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="amount">Amount</label>
+				<input type="number" id="amount" name="amount" ng-model="amount" ng-max="from.account.total" required class="form-control" />
+			</div>
+			<div class="pull-right">
+				<button class="transfer btn btn-info" ng-disabled="form.$invalid" ng-click="transfer(amount)">
+					<i class="fa fa-money"></i>
+					Transfer
+				</button>
+				<a class="btn btn-danger" ui-sref="customers.list">
+					<i class="fa fa-remove"></i>
+					Cancel
+				</a>
+			</div>
+		</div>
 	</div>
 </form>

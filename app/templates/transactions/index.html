@@ -1,5 +1,8 @@
-<ul>
-	<li class="transaction" ng-repeat="transaction in transactions">
-		{{transaction.created}} <strong>{{getTransactionAmount(transaction)}}</strong>
-	</li>
-</ul>
+<h2>
+	Transactions for {{account.id}}
+	<a class="btn btn-info btn-sm pull-right" ui-sref="accounts">
+		<i class="fa fa-group"></i>
+		Back to accounts
+	</a>
+</h2>
+<transactions-table transactions="transactions"></transactions-table>

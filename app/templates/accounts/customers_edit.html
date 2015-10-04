@@ -1,6 +1,17 @@
+<h3>
+	<i class="fa fa-edit"></i>
+	Editing Account {{account.id}}
+</h3>
 <form name="form" novalidate>
 	<account-fields></account-fields>
-	<button type="submit" class="edit-account" ng-click="form.$valid && updateAccount()">
-		Edit
-	</button>
+	<div class="pull-right">
+		<button type="submit" class="edit-account btn btn-warning" ng-click="form.$valid && updateAccount()">
+			<i class="fa fa-edit"></i>
+			Edit
+		</button>
+		<a class="btn btn-danger" ui-sref="customers.accounts.list( { customerId : customer.id } )">
+			<i class="fa fa-remove"></i>
+			Cancel
+		</a>
+	</div>
 </form>

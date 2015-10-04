@@ -1,6 +1,7 @@
 "use strict";
 
 var angular = require( "angular" );
+var angularAnimate = require( "angular-animate" );
 
 var customers = require( "js/customers" );
 var accounts = require( "js/accounts" );
@@ -15,10 +16,13 @@ var ApplicationConfig = require( "config.json" );
  *
  * @module app
  */
-angular.module( "app", [ customers, accounts, transactions, transfer, authentication ] )
+angular.module( "app", [ customers, accounts, transactions, transfer, authentication, angularAnimate ] )
 	.constant( "ApplicationConfig", ApplicationConfig )
 	.config( [ "$localStorageProvider", function( $localStorageProvider ) {
 		$localStorageProvider.setKeyPrefix( "app-" );
+	} ] )
+	.run( [ "$rootScope", function( $rootScope ) {
+		$rootScope.appReady = true;
 	} ] );
 
 angular.element( document ).ready( function() {

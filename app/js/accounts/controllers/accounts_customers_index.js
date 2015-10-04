@@ -11,7 +11,8 @@ var _ = require( "lodash" );
  * @memberof module:Accounts
  */
 var AccountsCustomersIndexController = function( $scope, Accounts, CustomerResolver ) {
-	$scope.accounts = _.where( Accounts, { customerId : CustomerResolver().id } );
+	$scope.customer = CustomerResolver();
+	$scope.accounts = _.where( Accounts, { customerId : $scope.customer.id } );
 
 	/**
 	 * Removes given account from the list of accounts.
@@ -22,6 +23,7 @@ var AccountsCustomersIndexController = function( $scope, Accounts, CustomerResol
 	 */
 	$scope.removeAccount = function( account ) {
 		$scope.accounts.splice( $scope.accounts.indexOf( account ), 1 );
+		Accounts.splice( Accounts.indexOf( account ), 1 );
 	};
 };
 

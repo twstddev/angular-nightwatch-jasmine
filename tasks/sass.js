@@ -6,6 +6,8 @@ var debug = require( "gulp-debug" );
 
 var compileSass = function( env ) {
 	var pathsToInclude = [
+		global.getNpmPath( "bootstrap-sass/assets/stylesheets/"),
+		global.getNpmPath( "font-awesome/scss/"),
 	];
 
 	return gulp.src( global.getApplicationPath( "sass/main.scss" ) )
